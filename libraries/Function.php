@@ -12,7 +12,7 @@
 
 	function base_url()
 	{
-		return $url="http://localhost:8080/WebBanSach/";
+		return $url="http://localhost/blogs/";
 	}
 	function layid($items)
 	{
