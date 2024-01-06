@@ -255,7 +255,7 @@ if( ! function_exists( '' ))
 		    {
 		        if ($object != "." && $object != "..")
 		        {
-		           if (filetype($dir."/".$object) == "dir") remove_dir($dir."/".$object);
+		           if (filetype($dir."/".$object) == "dir"); //remove_dir($dir."/".$object);
 		           else unlink($dir."/".$object);
 		        }
 		    }
