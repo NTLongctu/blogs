@@ -1,9 +1,12 @@
 
+</div>
+            <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -19,7 +22,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -49,13 +51,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/blogs/public/admin/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="/blogs/public/admin/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="/blogs/public/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/blogs/public/admin/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
