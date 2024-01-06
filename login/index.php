@@ -37,7 +37,7 @@
             }
             else
             {
-              $_SESSION['error'] = "Sai tên tài khoản hoặc mật khẩu! ";img
+              $_SESSION['error'] = "Sai tên tài khoản hoặc mật khẩu! ";
             }
         }
     } 
