@@ -1,3 +1,7 @@
+<?php 
+    require_once ("autoload/autoload.php");
+    //$thich = $db->fetchAll("thich");
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +31,28 @@
          <aside id="colorlib-aside" role="complementary" class="js-fullheight">
             <nav id="colorlib-main-menu" role="navigation">
                <ul>
-                  <li><img src="/blogs/img/Screenshot 2024-01-06 193822.jpg" class="rounded-circle shadow-4"style="width: 100px;" alt="Avatar" />  Welcome back</li>
-                  <li class="colorlib-active"><a href="index.html">Home</a></li>
-                  <li><a href="/blogs/modules/category">category</a></li>
+                  <?php if(isset($_SESSION['name_user'])) :?>
+                     <li><img src="/blogs/img/<?php echo $_SESSION['avatar']; ?>" class="rounded-circle shadow-4"style="width: 100px;" alt="Avatar" />  Welcome back</li>
+                     <li class="colorlib-active"><a href="index.php">Home</a></li>
+                     <li class="fa fa-unlock"><a href="myblogs.php">My blogs</a></li>
+                     <li class="fa fa-unlock"><a href="createnewbolg.php">Create new blog</a></li>
+                     <li class="fa fa-unlock"><a href="index.php">Profile</a></li>
+                     <li><a href="thoat.php">Logout</a></li>
+                  <?php else : ?>
+                     <li class="colorlib-active"><a href="index.php">Home</a></li>
+                     <li>
+                        <a href="login.php"><i class="fa fa-unlock"></i>Login</a>
+                     </li>
+                     <li>
+                        <a href="register.php"><i class="fa fa-unlock"></i>register</a>
+                     </li>
+
+                  <!-- <li><a href="/blogs/modules/category">category</a></li>
                   <li><a href="fashion.html">Fashion</a></li>
                   <li><a href="travel.html">Travel</a></li>
                   <li><a href="about.html">About</a></li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="contact.html">Contact</a></li> -->
+                  <?php endif; ?>
                </ul>
             </nav>
             <div class="colorlib-footer">

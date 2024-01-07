@@ -69,7 +69,8 @@
                 "name" => $username,
                 "email" => postInput('Email'),
                 "phone"=>postInput('phone'),
-                "address" =>postInput('address')
+                "address" =>postInput('address'),
+                "avatar" => 'download.jpg'
             ];
             $id_insert = $db->insert("users",$data);
             _debug($id_insert);

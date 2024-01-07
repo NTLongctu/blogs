@@ -24,11 +24,12 @@
                 "username" => postInput('username'),
                 "password" => $pass,
             ];
-            $is_check = $db->fetchOne("users","username = '".$data['username']."' AND password='". md5(postInput('password')) ."' ");
+            $is_check = $db->fetchOne("users","username = '".$data['username']."' AND password='". md5(postInput('password')) ."'");
             if($is_check != NULL)
             {
               $_SESSION['name_user']= $is_check['name'];
-              $_SESSION['name_id'] = $is_check['id']; 
+              $_SESSION['name_id'] = $is_check['id'];
+              $_SESSION['avatar'] = $is_check['avatar'];
               echo "<script>alert('Đăng nhập thành công!');location.href='index.php' </script>";
             }
             else

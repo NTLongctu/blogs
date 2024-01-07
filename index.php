@@ -1,3 +1,6 @@
+<?php
+   require_once ("autoload/autoload.php");
+?>
 <?php require_once("layouts/header.php"); ?>
                      <div class="col-xl-8 py-5 px-md-5">
                         <div class="row pt-md-4">

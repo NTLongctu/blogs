@@ -14,7 +14,7 @@
 	{
 		return $url="http://localhost/blogs/";
 	}
-	function layid($items)
+	function getid($items)
 	{
 		return reset($items);
 	}
