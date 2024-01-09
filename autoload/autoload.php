@@ -5,4 +5,5 @@
 	$db = new Database ;
 	define("ROOT",$_SERVER['DOCUMENT_ROOT']."/blogs/img/");
 	$category = $db->fetchAll("category");
+	$currentDate = date('Y-m-d H:i:s');
 ?>

@@ -281,5 +281,60 @@ if (!function_exists('get_start_and_time'))
     }
 }
 
+function convertDate($time, $format = 'M d, Y') {
+    /**
+     * Asume the date is 2023-09-01 23:11:01 
+     * F = September ; Month as text 
+     * M  = Sep ; Month with 3 chars 
+     * m  = 08 ; Month with 3 chars 
+     * j = 1   : day without zero 
+     * d = 01   : day with zero 
+     * D = Fri  : day with 3 chars
+     * l = Friday  : day with text
+     * Y = 2023 : Year Full
+     * y = 23  : Year short
+     * H = 23  : time for 24 hours 
+     * h = 11  : time for 12 hours 
+     * i = 11  : minute  
+     * s = 01  : Second 
+     * 
+     */
+    // Convert the input time string to a DateTime object
+    $dateTime = new DateTime($time);
+
+    // Format the date according to the specified format
+    $formattedDate = $dateTime->format($format);
+
+    return $formattedDate;
+}
+
+function moveFileToImageDirectory($fileInputName, $imageDirectory) {
+    // Check if a file was uploaded
+    if (isset($_FILES[$fileInputName]) && $_FILES[$fileInputName]['error'] === UPLOAD_ERR_OK) {
+        $originalFileName = $_FILES[$fileInputName]['name'];
+        $tempFilePath = $_FILES[$fileInputName]['tmp_name'];
+
+        // Get the file extension
+        $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+        // Generate a unique name for the file
+        $newFileName = uniqid() . '.' . $fileExtension;
+
+        // Build the new path to move the file
+        $newFilePath = $imageDirectory . '/' . $newFileName;
+
+        // Move the file to the new location
+        if (move_uploaded_file($tempFilePath, $newFilePath)) {
+            // Return the new file name if the move was successful
+            return $newFileName;
+        } else {
+            // Return an error message if the move failed
+            return 'Error moving file.';
+        }
+    } else {
+        // Return an error message if no file was uploaded or an error occurred
+        return 'No file uploaded or an error occurred.';
+    }
+}
 
 ?>
