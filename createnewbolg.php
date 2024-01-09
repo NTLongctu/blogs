@@ -18,9 +18,9 @@
         {
             $error['content'] = "Enter a valid content!";
         }
-        if(!isset($_FILES['fileInput']))
+        if(!isset($_FILES['file_input']))
         {
-            $error['fileInput'] = "Bạn chưa chọn hình!";
+            $error['file_input'] = "Bạn chưa chọn hình!";
         }
         if(postInput('tag')=='')
         {
@@ -31,16 +31,16 @@
         if(empty($error))
         {
             $is_chk_tg = $db -> fetchOne("category","name = '".postInput('tag')."'");
-            var_dump($tg);
             if(empty($is_chk_tg))
             {
                 $insert = $db->insert("category",$tg);
             }
             $is_chk_tg = $db -> fetchOne("category","name = '".postInput('tag')."'");
             $id_tag = getid($is_chk_tg);
-            $fileInputName = 'fileInput';
-            $newFileName = moveFileToImageDirectory($fileInputName,"img");
-            var_dump($newFileName);
+            
+            // $fileInputName = 'file_input';
+            // $newFileName = moveFileToImageDirectory($fileInputName,"img");
+
             $data =
             [
                 "title" => postInput('title'),
@@ -48,9 +48,23 @@
                 "content" => postInput('content'),
                 "tag_id" => $id_tag,
                 "user_id" => $_SESSION['name_id'],
-                "image" => $newFileName,
+                //"image" => $fileInputName,
                 "date_create" => $currentDate
             ];
+
+            if (isset($_FILES['file_input'])) {
+                $files = $_FILES['file_input'];
+                $targetDirectory = 'img/';
+            
+                $uploadResults = moveMultipleFilesToDirectory($files, $targetDirectory);
+                $data['image'] = $uploadResults[0];
+                // Print upload results
+                foreach ($uploadResults as $result) {
+                    echo $result . '<br>';
+                    //$data['thunbar'] = $uploadResults;
+                }
+            }
+
             $id_insert = $db->insert("blog",$data);
             if($id_insert)
             {
@@ -113,7 +127,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label >Select image</label>
-                                        <input type="file" class="form-control" name="fileInput" id="fileInput" multiple>
+                                        <input type="file" class="form-control" name="file_input[]" id="file_input" multiple>
                                         <?php if(isset($error['image'])) : ?>
                                         <div class="alert alert-danger alert-dismissable"> 
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

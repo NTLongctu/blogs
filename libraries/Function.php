@@ -336,5 +336,26 @@ function moveFileToImageDirectory($fileInputName, $imageDirectory) {
         return 'No file uploaded or an error occurred.';
     }
 }
+function moveMultipleFilesToDirectory($files, $targetDirectory) {
+    // Create the target directory if it doesn't exist
+    if (!file_exists($targetDirectory) && !is_dir($targetDirectory)) {
+        mkdir($targetDirectory, 0755, true);
+    }
+
+    $uploadedFileNames = [];
+
+    // Loop through each uploaded file
+    for ($i = 0; $i < count($files['name']); $i++) {
+        $fileName = $files['name'][$i];
+        $targetPath = $targetDirectory . $fileName;
+
+        // Move the file to the specified directory
+        if (move_uploaded_file($files['tmp_name'][$i], $targetPath)) {
+            $uploadedFileNames[] = $fileName;
+        }
+    }
+
+    return $uploadedFileNames;
+}
 
 ?>
