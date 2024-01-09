@@ -24,6 +24,9 @@
       <link rel="stylesheet" href="/blogs/public/css/flaticon.css">
       <link rel="stylesheet" href="/blogs/public/css/icomoon.css">
       <link rel="stylesheet" href="/blogs/public/css/style.css">
+      <!-- Place the first <script> tag in your HTML's <head> -->
+      <script src="https://cdn.tiny.cloud/1/ac0fwwob5jr0eo96d57sp6p25rjejgt31fgcph8h4p4lpo7c/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
    </head>
    <body>
       <div id="colorlib-page">

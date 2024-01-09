@@ -2,7 +2,7 @@
     require_once ("autoload/autoload.php");
     $id = intval(getInput('id'));
     $blog = $db->fetchID("blog",$id);
-    $getnamecate = $db->fetchID("category",$editblog['tag_id']);
+    $getnamecate = $db->fetchID("category",$blog['tag_id']);
     _debug($blog);
 ?>
 <?php require_once("layouts/header.php"); ?>

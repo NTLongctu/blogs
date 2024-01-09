@@ -44,7 +44,7 @@
             $data =
             [
                 "title" => postInput('title'),
-                "subdescription" => postInput('content'),
+                "subdescription" => postInput('subdescription'),
                 "content" => postInput('content'),
                 "tag_id" => $id_tag,
                 "user_id" => $_SESSION['name_id'],
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Content</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="type the content here"  name='content'></textarea>
+                                        <textarea class="form-control" id="myTextarea" rows="20" placeholder="type the content here"  name='content'></textarea>
                                         <?php if(isset($error['content'])) : ?>
                                         <div class="alert alert-danger alert-dismissable"> 
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

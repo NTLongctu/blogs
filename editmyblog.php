@@ -4,7 +4,6 @@
     $id = intval(getInput('id'));
     $editblog = $db->fetchID("blog",$id);
     $getnamecate = $db->fetchID("category",$editblog['tag_id']);
-    _debug($getnamecate);
     if(empty(($editblog)))
     {
         $_SESSION['error'] = "Dữ liệu không tồn tại!";
@@ -45,7 +44,6 @@
             $id_tag = getid($is_chk_tg);
             $fileInputName = 'fileInput';
             $newFileName = moveFileToImageDirectory($fileInputName,"img");
-            var_dump($newFileName);
             $data =
             [
                 "title" => postInput('title'),
@@ -114,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1">Content</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="type the content here"  name="content" ><?php echo $editblog['content'] ?></textarea>
+                                        <textarea class="form-control" id="myTextarea" rows="20" placeholder="type the content here"  name="content" ><?php echo $editblog['content'] ?></textarea>
                                         <?php if(isset($error['content'])) : ?>
                                         <div class="alert alert-danger alert-dismissable"> 
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
