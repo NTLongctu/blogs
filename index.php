@@ -6,11 +6,13 @@
                   blog.subdescription AS blogsub, 
                   blog.date_create AS blogdate_create, 
                   blog.image AS blogimg, 
+                  users.name AS usersname,
                   category.name AS catename, 
                   COUNT(comments.id) AS CommentCount 
          FROM blog LEFT JOIN comments ON blog.id = comments.blog_id 
+         LEFT JOIN users ON users.id = blog.user_id
          LEFT JOIN category ON category.id = blog.tag_id 
-         GROUP BY blogid, blogtitle, blogsub, blogdate_create, blogimg, catename ORDER BY blog.id DESC";
+         GROUP BY blogid, usersname, blogtitle, blogsub, blogdate_create, blogimg, catename ORDER BY blog.id DESC";
    $myblog =$db->fetchsql($sql);
    $category = $db->fetchAll('category');
 
