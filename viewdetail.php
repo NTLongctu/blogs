@@ -62,7 +62,7 @@
 						</div>
 						<div class="about-author d-flex p-4 bg-light">
 							<div class="bio mr-5">
-								<img src="img/<?php echo $userblog['avatar']?>" alt="Image placeholder" class="img-fluid mb-4">
+									<img src="img/<?php echo $userblog['avatar']?>" alt="Image placeholder" class="img-fluid mb-4">
 							</div>
 							<div class="desc">
 								<h3><?php echo $userblog['name']?></h3>

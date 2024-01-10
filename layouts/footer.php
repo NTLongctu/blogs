@@ -2,6 +2,8 @@
    
    $sql_count ="SELECT blog.tag_id, COUNT(blog.tag_id) AS blogs_count, category.name AS catename FROM blog LEFT JOIN category ON blog.tag_id = category.id GROUP BY blog.tag_id";
    $blogs_count = $db->fetchsql($sql_count);
+
+   $cate =$db-> fetchALL('category');
 ?>
 <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
                         <div class="sidebar-box pt-md-4">
@@ -16,7 +18,7 @@
                            <h3 class="sidebar-heading">Categories</h3>
                            <ul class="categories">
                               <?php foreach($blogs_count as $item) : ?>
-                                 <li><a href="#"><?php echo $item['catename'] ?> <span>(<?php echo $item['blogs_count'] ?>)</span></a></li>
+                                 <li><a href="viewblogbycate.php?id=<?php echo $item['catename'] ?>"><?php echo $item['catename'] ?> <span>(<?php echo $item['blogs_count'] ?>)</span></a></li>
                               <?php endforeach; ?>
                            </ul>
                         </div>
@@ -59,14 +61,9 @@
                         <div class="sidebar-box ftco-animate">
                            <h3 class="sidebar-heading">Tag Cloud</h3>
                            <ul class="tagcloud">
-                              <a href="#" class="tag-cloud-link">animals</a>
-                              <a href="#" class="tag-cloud-link">human</a>
-                              <a href="#" class="tag-cloud-link">people</a>
-                              <a href="#" class="tag-cloud-link">cat</a>
-                              <a href="#" class="tag-cloud-link">dog</a>
-                              <a href="#" class="tag-cloud-link">nature</a>
-                              <a href="#" class="tag-cloud-link">leaves</a>
-                              <a href="#" class="tag-cloud-link">food</a>
+                              <?php foreach($cate as $items) : ?>
+                                 <a href="viewblogbycate.php?id=<?php echo $items['name'] ?>" class="tag-cloud-link"><?php echo $items['name'] ?></a>
+                              <?php endforeach; ?>
                            </ul>
                         </div>
                         <div class="sidebar-box subs-wrap img py-4" style="background-image: url(img/bg_1.jpg);">

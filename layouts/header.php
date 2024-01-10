@@ -53,7 +53,7 @@
                </ul>
             </nav>
             <div class="colorlib-footer">
-               <h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(img/bg_1.jpg);">Andrea <span>Moore</span></a></h1>
+               <h1 id="colorlib-logo" class="mb-4"><a href="index.php" style="background-image: url(img/bg_1.jpg);">Andrea <span>Moore</span></a></h1>
                
                <p class="pfooter">
                   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
