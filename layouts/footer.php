@@ -4,6 +4,19 @@
    $blogs_count = $db->fetchsql($sql_count);
 
    $cate =$db-> fetchALL('category');
+   $sql = "SELECT blog.id AS blogid, 
+                  blog.title AS blogtitle, 
+                  blog.subdescription AS blogsub, 
+                  blog.date_create AS blogdate_create, 
+                  blog.image AS blogimg, 
+                  users.name AS usersname,
+                  category.name AS catename, 
+                  COUNT(comments.id) AS CommentCount 
+         FROM blog LEFT JOIN comments ON blog.id = comments.blog_id 
+         LEFT JOIN category ON category.id = blog.tag_id
+         LEFT JOIN users ON users.id = blog.user_id
+         GROUP BY blogid, usersname, blogtitle, blogsub, blogdate_create, blogimg, catename ORDER BY blog.id DESC LIMIT 5";
+         $myblog =$db->fetchsql($sql);
 ?>
 <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
                         <div class="sidebar-box pt-md-4">
@@ -24,39 +37,19 @@
                         </div>
                         <div class="sidebar-box ftco-animate">
                            <h3 class="sidebar-heading">Popular Articles</h3>
-                           <div class="block-21 mb-4 d-flex">
-                              <a class="blog-img mr-4" style="background-image: url(img/image_1.jpg);"></a>
-                              <div class="text">
-                                 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-                                 <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> June 28, 2019</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                           <?php foreach($myblog as $item) : ?>      
+                              <div class="block-21 mb-4 d-flex">
+                                 <a class="blog-img mr-4" style="background-image: url(img/<?php echo $item['blogimg'];?>);"></a>
+                                 <div class="text">
+                                    <h3 class="heading"><a href="viewdetail.php?id=<?php echo$item['blogid'];?>"><?php echo $item['blogtitle']; ?></a></h3>
+                                    <div class="meta">
+                                       <div><a href="#"><span class="icon-calendar"></span><?php echo convertDate($item['blogdate_create']);?></a></div>
+                                       <div><a href="#"><span class="icon-person"></span><?php echo $item['usersname'];?></a></div>
+                                       <div><a href="#"><span class="icon-chat"></span><?php echo $item['CommentCount'];?></a></div>
+                                    </div>
                                  </div>
                               </div>
-                           </div>
-                           <div class="block-21 mb-4 d-flex">
-                              <a class="blog-img mr-4" style="background-image: url(img/image_2.jpg);"></a>
-                              <div class="text">
-                                 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-                                 <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> June 28, 2019</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="block-21 mb-4 d-flex">
-                              <a class="blog-img mr-4" style="background-image: url(img/image_3.jpg);"></a>
-                              <div class="text">
-                                 <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-                                 <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> June 28, 2019</a></div>
-                                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                 </div>
-                              </div>
-                           </div>
+                           <?php endforeach; ?>
                         </div>
                         <div class="sidebar-box ftco-animate">
                            <h3 class="sidebar-heading">Tag Cloud</h3>
