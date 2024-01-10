@@ -1,10 +1,10 @@
 <?php
     require_once ("autoload/autoload.php");
     $key = getInput('id');
+    $key2='';
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
          $key2 = postInput('id');
-
     }
     
     $sql = "SELECT blog.id AS blogid, 

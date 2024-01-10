@@ -5,40 +5,6 @@
 	$userblog = $db->fetchID("users",$blog['user_id']);
 	
     $getnamecate = $db->fetchID("category",$blog['tag_id']);
-
-	if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-		$data =
-        [
-            "comment" => postInput('comment')
-        ];
-		$error = [];
-        if(postInput('comment')=='')
-        {
-            $error['error'] = "type your comments!";
-        }
-		if(empty($error))
-        {
-			$data =
-            [
-                "comment" => postInput('comment'),
-                "user_id" => $_SESSION['name_id'],
-				"blog_id" => $id,
-                "date_comment" => $currentDate
-            ];
-			$id_insert = $db->insert("comments", $data);
-			if($id_insert > 0)
-                {
-                    //$_SESSION['success'] = "Thêm mới thành công ";
-                    echo "<script>alert('your comment is posted!');</script>";
-                }
-                else
-                {
-                    //thất bại
-                    echo "<script>alert('comment fail!');</script>";
-                }
-		}
-	}
 	$sql = "SELECT comments.comment AS cm, date_comment, users.name AS username, users.avatar AS img 
 	FROM comments
 	LEFT JOIN users ON users.id = comments.user_id
@@ -79,7 +45,7 @@
 									</div>
 									<div class="comment-body">
 										<h3><?php echo $item['username'];?></h3>
-										<div class="meta"><?php echo $item['date_comment'];?></div>
+										<div class="meta"><?php echo convertDate($item['date_comment'],'F d, Y');?> AT <?php echo convertDate($item['date_comment'],'H:i');?>PM</div>
 										<p><?php echo $item['cm'];?></p>
 										<p><a href="#" class="reply">Reply</a></p>
 									</div>
