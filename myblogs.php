@@ -27,7 +27,7 @@
                                        <div class="meta-wrap">
                                           <p class="meta">
                                              <span><i class="icon-calendar mr-2"></i><?php echo convertDate($item['blogdate_create']);?></span>
-                                             <span><a href="single.html"><i class="icon-folder-o mr-2"></i></a>
+                                             <span><a href="viewblogbycate.php?id=<?php echo $item['catename'] ?>"><i class="icon-folder-o mr-2"></i></a>
                                              <?php echo $item['catename']; ?></span>
                                              <span><i class="icon-comment2 mr-2"></i><?php echo $item['CommentCount'];?> Comment</span>
                                           </p>
