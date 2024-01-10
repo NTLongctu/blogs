@@ -4,6 +4,7 @@
     $id = intval(getInput('id'));
     $editblog = $db->fetchID("blog",$id);
     $getnamecate = $db->fetchID("category",$editblog['tag_id']);
+    $categoryNAME = $db->fetchAll('category');
     if(empty(($editblog)))
     {
         $_SESSION['error'] = "Dữ liệu không tồn tại!";
@@ -69,19 +70,6 @@
                     //$data['image'] = $uploadResults;
                 }
             }
-
-            if (isset($_FILES['file_input'])) {
-                $files = $_FILES['file_input'];
-                $targetDirectory = 'img/';
-            
-                $uploadResults = moveMultipleFilesToDirectory($files, $targetDirectory);
-            
-                // Print upload results
-                foreach ($uploadResults as $result) {
-                    echo $result . '<br>';
-                }
-            }
-
             
 
             $id_update = $db->update("blog",$data, array('id' => $id));
@@ -162,7 +150,12 @@
                                     </div>
                                     <label >tags</label>
                                     <div class="form-group">    
-                                        <input class="form-control" type="text" placeholder="Input tag" name='tag' value="<?php echo $getnamecate['name'] ?>" >
+                                        <input class="form-control" type="text" placeholder="Input tag" name='tag' list="tag" name="tag" autocomplete="off">
+                                            <datalist id="tag">
+                                                <?php foreach($categoryNAME as $items) : ?>
+                                                    <option value="<?php echo $items['name'] ?>">
+                                                <?php endforeach; ?>
+                                            </datalist>
                                         <?php if(isset($error['tag'])) : ?>
                                         <div class="alert alert-danger alert-dismissable"> 
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

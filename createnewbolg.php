@@ -1,7 +1,7 @@
 <?php
     $open = "blog";
     require_once ("autoload/autoload.php");
-    
+    $categoryNAME = $db->fetchAll('category');
 
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -137,7 +137,12 @@
                                     </div>
                                     <label >tags</label>
                                     <div class="form-group">    
-                                        <input class="form-control" type="text" placeholder="Input tag" name='tag'>
+                                        <input class="form-control" type="text" placeholder="Input tag" name='tag' list="tag" name="tag" autocomplete="off">
+                                            <datalist id="tag">
+                                                <?php foreach($categoryNAME as $items) : ?>
+                                                    <option value="<?php echo $items['name'] ?>">
+                                                <?php endforeach; ?>
+                                            </datalist>
                                         <?php if(isset($error['tag'])) : ?>
                                         <div class="alert alert-danger alert-dismissable"> 
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

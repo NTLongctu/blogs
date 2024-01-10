@@ -20,19 +20,23 @@
         {
             $error['lastname'] = "Hãy nhập tên!";
         }
+        if(!isset($_FILES['file_input']))
+        {
+            $error['file_input'] = "Bạn chưa chọn hình!";
+        }
 
-        if(postInput('address')=='')
-        {
-            $error['address'] = "Hãy nhập địa chỉ!";
-        }
-        if(postInput('Email')=='')
-        {
-            $error['Email'] = "Hãy nhập email!";
-        }
-        if(postInput('phone')=='')
-        {
-            $error['phone'] = "Hãy nhập số điện thoại!";
-        }
+        // if(postInput('address')=='')
+        // {
+        //     $error['address'] = "Hãy nhập địa chỉ!";
+        // }
+        // if(postInput('Email')=='')
+        // {
+        //     $error['Email'] = "Hãy nhập email!";
+        // }
+        // if(postInput('phone')=='')
+        // {
+        //     $error['phone'] = "Hãy nhập số điện thoại!";
+        // }
 
         if(postInput('username')=='')
         {
@@ -61,27 +65,39 @@
         
         if(empty($error))
         {
+          $data =
+          [
+              "username" => postInput('username'),
+              "password" => $pass,
+              "name" => $username,
+              "email" => postInput('Email'),
+              "phone"=>postInput('phone'),
+              "address" =>postInput('address')
+              //"image" => $fileInputName,
+              //"avatar" => $newFileName
+          ];
+          if (isset($_FILES['file_input'])) {
+            $files = $_FILES['file_input'];
+            $targetDirectory = 'img/';
+        
+            $uploadResults = moveMultipleFilesToDirectory($files, $targetDirectory);
+            $data['avatar'] = $uploadResults[0];
+            // Print upload results
+            foreach ($uploadResults as $result) {
+                echo $result . '<br>';
+                //$data['image'] = $uploadResults;
+            }
+          }
 
-            $data =
-            [
-                "username" => postInput('username'),
-                "password" => $pass,
-                "name" => $username,
-                "email" => postInput('Email'),
-                "phone"=>postInput('phone'),
-                "address" =>postInput('address'),
-                "avatar" => 'download.jpg'
-            ];
-            $id_insert = $db->insert("users",$data);
-            _debug($id_insert);
-            if($id_insert)
-            {
-                $_SESSION['success']= "Tạo tài khoản thành công thành công!";
-            }
-            else
-            {
-                $_SESSION['error'] = "Thêm mới thất bại! ";
-            }
+          $id_insert = $db->insert("users",$data);
+          if($id_insert)
+          {
+              $_SESSION['success']= "Tạo tài khoản thành công thành công!";
+          }
+          else
+          {
+              $_SESSION['error'] = "Thêm mới thất bại! ";
+          }
         }
     }
 
@@ -137,7 +153,7 @@
                       </div>
                    <?php endif; ?>
               </div>
-              <form action="" class="needs-validation" method="POST" >
+              <form action="" class="needs-validation" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="nhập họ" name='firstname'>
@@ -213,6 +229,15 @@
                           </div>
                       <?php endif; ?>
                   </div>
+                </div>
+                <div class="form-group">
+                  <input type="file" class="form-control" name="file_input[]" id="file_input" multiple>
+                  <?php if(isset($error['file_input'])) : ?>
+                        <div class="alert alert-danger alert-dismissable"> 
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <?php echo $error['file_input']; unset($error['file_input']); ?> 
+                        </div>
+                  <?php endif; ?>
                 </div>
                 <hr>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Đăng ký tài khoản</button>

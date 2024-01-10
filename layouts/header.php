@@ -49,12 +49,6 @@
                      <li>
                         <a href="register.php"><i class="fa fa-unlock"></i>register</a>
                      </li>
-
-                  <!-- <li><a href="/blogs/modules/category">category</a></li>
-                  <li><a href="fashion.html">Fashion</a></li>
-                  <li><a href="travel.html">Travel</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="contact.html">Contact</a></li> -->
                   <?php endif; ?>
                </ul>
             </nav>

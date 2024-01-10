@@ -325,8 +325,8 @@ function moveFileToImageDirectory($fileInputName, $imageDirectory) {
 
         // Move the file to the new location
         if (move_uploaded_file($tempFilePath, $newFilePath)) {
-            // Return the new file name if the move was successful
-            return $newFileName;
+            // Return the new file path if the move was successful
+            return $newFilePath;
         } else {
             // Return an error message if the move failed
             return 'Error moving file.';
