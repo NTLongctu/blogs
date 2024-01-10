@@ -43,7 +43,7 @@
                                  <div class="text">
                                     <h3 class="heading"><a href="viewdetail.php?id=<?php echo$item['blogid'];?>"><?php echo $item['blogtitle']; ?></a></h3>
                                     <div class="meta">
-                                       <div><a href="#"><span class="icon-calendar"></span><?php echo convertDate($item['blogdate_create']);?></a></div>
+                                       <div><a href="#"><span class="icon-calendar"></span> <?php echo convertDate($item['blogdate_create']);?></a></div>
                                        <div><a href="#"><span class="icon-person"></span><?php echo $item['usersname'];?></a></div>
                                        <div><a href="#"><span class="icon-chat"></span><?php echo $item['CommentCount'];?></a></div>
                                     </div>

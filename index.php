@@ -33,6 +33,7 @@
                                              <span><a href="viewblogbycate.php?id=<?php echo $item['catename'] ?>"><i class="icon-folder-o mr-2"></i></a>
                                              <?php echo $item['catename']; ?></span>
                                              <span><i class="icon-comment2 mr-2"></i><?php echo $item['CommentCount']; ?> Comment</span>
+                                             <span><i class="icon-person mr-2"></i><?php echo $item['usersname'];?></span>
                                           </p>
                                        </div>
                                        <p class="mb-4"><?php echo $item['blogsub']; ?></p>

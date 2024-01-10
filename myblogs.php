@@ -33,7 +33,7 @@
                                           </p>
                                        </div>
                                        <p class="mb-4"><?php echo $item['blogsub']; ?></p>
-                                       <p><a href="editmyblog.php?id=<?php echo$item['blogid'];?>" class="btn-custom">View detail blog <span class="ion-ios-arrow-forward"></span></a></p>
+                                       <p><a href="editmyblog.php?id=<?php echo$item['blogid'];?>" class="btn-custom">Edit your blog <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
                                  </div>
                               </div>
