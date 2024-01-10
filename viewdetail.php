@@ -10,10 +10,10 @@
     {
 		$data =
         [
-            "name" => postInput('name')
+            "comment" => postInput('comment')
         ];
 		$error = [];
-        if(postInput('name')=='')
+        if(postInput('comment')=='')
         {
             $error['error'] = "type your comments!";
         }
