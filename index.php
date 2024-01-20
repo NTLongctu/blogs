@@ -14,7 +14,42 @@
          LEFT JOIN category ON category.id = blog.tag_id 
          GROUP BY blogid, usersname, blogtitle, blogsub, blogdate_create, blogimg, catename ORDER BY blog.id DESC";
    $myblog =$db->fetchsql($sql);
-   $category = $db->fetchAll('category');
+   //pagination - start
+   //find RECORDS
+   $total_records = count($myblog);
+   //find LIMIT and CURRENT_PAGE
+   $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+   $limit = 5;
+   // Calculate  TOTAL_PAGE and START
+   // TOTAL_PAGE
+   $total_page = ceil($total_records / $limit);
+
+   // Giới hạn current_page trong khoảng 1 đến total_page
+   if ($current_page > $total_page){
+      $current_page = $total_page;
+   }
+   else if ($current_page < 1){
+      $current_page = 1;
+   }
+   // Tìm Start
+   $start = ($current_page - 1) * $limit;
+   $sql = "SELECT blog.id AS blogid, 
+                  blog.title AS blogtitle, 
+                  blog.subdescription AS blogsub, 
+                  blog.date_create AS blogdate_create, 
+                  blog.image AS blogimg, 
+                  users.name AS usersname,
+                  category.name AS catename, 
+                  COUNT(comments.id) AS CommentCount 
+         FROM blog LEFT JOIN comments ON blog.id = comments.blog_id 
+         LEFT JOIN users ON users.id = blog.user_id
+         LEFT JOIN category ON category.id = blog.tag_id 
+         GROUP BY blogid, usersname, blogtitle, blogsub, blogdate_create, blogimg, catename ORDER BY blog.id DESC LIMIT $start, $limit";
+   $myblog =$db->fetchsql($sql);
+   //pagination - end
+
+
+
 
 
 ?>
@@ -48,13 +83,27 @@
                            <div class="col">
                               <div class="block-27">
                                  <ul>
-                                    <li><a href="#">&lt;</a></li>
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">&gt;</a></li>
+                                    
+                                    <?php if ($current_page > 1 && $total_page > 1) {
+                                             echo '<li><a href="index.php?page='.($current_page-1).'">&lt;</a></li>';
+                                          }
+                                          for ($i = 1; $i <= $total_page; $i++){
+                                             // Nếu là trang hiện tại thì hiển thị thẻ span
+                                             // ngược lại hiển thị thẻ a
+                                             if ($i == $current_page){
+                                                 echo '<li class="active"><span>'.$i.'</span></li>';
+                                             }
+                                             else{
+                                                echo '<li><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+                                             }
+                                         }
+                                         // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+                                         if ($current_page < $total_page && $total_page > 1){
+                                             echo '<li><a href="index.php?page='.($current_page+1).'">&gt;</a></li>';
+                                             
+                                         }
+                                    ?>
+                                  
                                  </ul>
                               </div>
                            </div>
