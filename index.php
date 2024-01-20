@@ -24,7 +24,7 @@
                            <?php $stt = 1; foreach ($myblog as $item) : ?>
                               <div class="col-md-12">
                                  <div class="blog-entry ftco-animate d-md-flex">
-                                    <a href="single.html" class="img img-2" style="background-image: url(img/<?php echo $item['blogimg'];?>);"></a>
+                                    <a href="viewdetail.php?id=<?php echo$item['blogid'];?>" class="img img-2" style="background-image: url(img/<?php echo $item['blogimg'];?>);"></a>
                                     <div class="text text-2 pl-md-4">
                                        <h3 class="mb-2"><a href="viewdetail.php?id=<?php echo$item['blogid'];?>"><?php echo $item['blogtitle']; ?></a></h3>
                                        <div class="meta-wrap">
